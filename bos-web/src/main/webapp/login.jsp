@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -81,12 +82,13 @@ input[type=password] {
 							<img id="loginform:vCode" src="${pageContext.request.contextPath }/validatecode.jsp"
 								onclick="javascript:document.getElementById('loginform:vCode').src='${pageContext.request.contextPath }/validatecode.jsp?'+Math.random();" />
 						</div>
-						<a href="#" onclick="document.getElementById('#loginform').submit();" id="loginform:j_id19" name="loginform:j_id19">
-						<span
-							id="loginform:loginBtn" class="btn btn-login"
-							style="margin-top:-36px;">登录</span>
+						<a onclick="document.getElementById('loginform').submit();" href="#" id="loginform:j_id19" name="loginform:j_id19">
+                                                <span
+														id="loginform:loginBtn" class="btn btn-login"
+														style="margin-top:-36px;">登录</span>
 						</a>
 					</div>
+					<div style="text-align: center;color: #FF0000 " ><s:actionerror/></div>
 				</form>
 			</div>
 		</div>

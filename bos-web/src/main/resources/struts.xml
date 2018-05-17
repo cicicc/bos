@@ -14,7 +14,8 @@
         </action>
 
         <action name="userAction_*" class="com.afeng.bos.web.action.UserAction" method="{1}" >
-
+            <result name="login">/login.jsp</result>
+            <result name="home" >/index.jsp</result>
         </action>
     </package>
 </struts>

@@ -2,14 +2,11 @@ package com.afeng.bos.web.action;
 
 import com.afeng.bos.domain.User;
 import com.afeng.bos.service.IUserService;
-import com.afeng.bos.utils.CookieUtils;
-import com.afeng.bos.utils.MD5Utils;
-import com.opensymphony.xwork2.ActionContext;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.apache.commons.lang3.StringUtils;
-import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 
 @Controller
@@ -18,7 +15,7 @@ public class UserAction  extends BaseAction<User>{
     //注入登录页面的验证码
     private String checkcode;
 
-    @Resource
+    @Autowired
     private IUserService userService;
 
     public void setCheckcode(String checkcode) {

@@ -1,7 +1,6 @@
 package com.afeng.bos.dao.impl;
 
 import com.afeng.bos.dao.IBaseDao;
-import org.apache.poi.ss.formula.functions.T;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
@@ -11,7 +10,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class BaseDaoImpl extends HibernateDaoSupport implements IBaseDao<T> {
+public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     private Class<T> entityClass;//表示操作的实体类类型
     /**
      * 注入sessionFactory
