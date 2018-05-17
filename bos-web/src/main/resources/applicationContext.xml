@@ -36,12 +36,12 @@
                 <prop key="hibernate.format_sql">true</prop>
             </props>
         </property>
-        <!-- 注入hibernate的映射文件 -->
-        <!--<property name="mappingLocations">
+         <!--注入hibernate的映射文件-->
+        <property name="mappingLocations">
             <list>
                 <value>classpath:com/afeng/bos/domain/*.xml</value>
             </list>
-        </property>-->
+        </property>
     </bean>
 
     <!-- 配置事务管理器 -->

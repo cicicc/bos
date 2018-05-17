@@ -58,19 +58,19 @@ input[type=password] {
 				<div id="lbNormal" class="loginFuncMobile">员工登录</div>
 			</div>
 			<div class="loginForm">
-				<form id="loginform" name="loginform" method="post" class="niceform"
-					action="">
+				<form id="loginform" name="loginform" method="post"  class="niceform"
+					action="${pageContext.request.contextPath}/userAction_login.action">
 					<div id="idInputLine" class="loginFormIpt showPlaceholder"
 						style="margin-top: 5px;">
 						<input id="loginform:idInput" type="text" name="username"
 							class="loginFormTdIpt" maxlength="50" />
-						<label for="idInput" class="placeholder" id="idPlaceholder">帐号：</label>
+						<label for="loginform:idInput" class="placeholder" id="idPlaceholder">帐号：</label>
 					</div>
 					<div class="forgetPwdLine"></div>
 					<div id="pwdInputLine" class="loginFormIpt showPlaceholder">
 						<input id="loginform:pwdInput" class="loginFormTdIpt" type="password"
 							name="password" value="" />
-						<label for="pwdInput" class="placeholder" id="pwdPlaceholder">密码：</label>
+						<label for="loginform:pwdInput" class="placeholder" id="pwdPlaceholder">密码：</label>
 					</div>
 					<div class="loginFormIpt loginFormIptWiotTh"
 						style="margin-top:58px;">
@@ -81,7 +81,7 @@ input[type=password] {
 							<img id="loginform:vCode" src="${pageContext.request.contextPath }/validatecode.jsp"
 								onclick="javascript:document.getElementById('loginform:vCode').src='${pageContext.request.contextPath }/validatecode.jsp?'+Math.random();" />
 						</div>
-						<a href="${pageContext.request.contextPath}/page_common_index.action" id="loginform:j_id19" name="loginform:j_id19">
+						<a href="#" onclick="document.getElementById('#loginform').submit();" id="loginform:j_id19" name="loginform:j_id19">
 						<span
 							id="loginform:loginBtn" class="btn btn-login"
 							style="margin-top:-36px;">登录</span>

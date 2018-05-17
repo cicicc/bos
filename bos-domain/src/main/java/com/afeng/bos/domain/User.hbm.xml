@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class table="t_user" name="com.afeng.bos.domain.User">
+        <id name="id" column="id">
+            <generator class="uuid"/>
+        </id>
+        <property name="username" column="username"/>
+        <property name="password" column="password"/>
+        <property name="salary" column="salary"/>
+        <property name="birthday" column="birthday"/>
+        <property name="gender" column="gender"/>
+        <property name="station" column="station"/>
+        <property name="telephone" column="telephone"/>
+        <property name="remark" column="remark"/>
+    </class>
+</hibernate-mapping>
