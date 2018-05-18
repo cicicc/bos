@@ -4,15 +4,25 @@ import com.afeng.bos.dao.IUserDao;
 import com.afeng.bos.domain.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
-
+    /**
+     * 通过页面上用户输入的用户名和密码到数据库中进行查询 返回结果
+     * @param username 用户输入的用户名
+     * @param password 用户输入的密码
+     * @return 若成功在数据库中查询到就返回user对象 否则返回null
+     */
     @Override
     public User findUser(String username, String password) {
         String hql = "from User where username=? and password=?";
-        User user = (User) this.getHibernateTemplate().find(hql, username,password).get(0);
-        System.out.println(user);
+        List<User> list = (List<User>) this.getHibernateTemplate().find(hql, username, password);
+        User user = null;
+        if (list.size() > 0 && list != null) {
+           user = list.get(0);
+        }
         return user;
     }
 

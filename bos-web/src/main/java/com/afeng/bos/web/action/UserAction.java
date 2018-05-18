@@ -22,6 +22,12 @@ public class UserAction  extends BaseAction<User>{
         this.checkcode = checkcode;
     }
 
+    /**
+     * 登录模块的校验
+     * 首先判断用户的验证模式是否输入正确 如果输入正确再进行下一步 判断用户名和密码输入是否正确
+     * 否则直接返回登录页面并提示用户验证码输入错误
+     * @return 验证码,用户名,密码三者如果有一个输入错误 都会返回到登录页面去并告知错误信息 全都输入正确进入首页
+     */
     public String login(){
         //获取存放在session域中的key
         String realCheckCode = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
@@ -31,14 +37,26 @@ public class UserAction  extends BaseAction<User>{
             if (user == null) {
                 this.addActionError("用户名或者密码错误");
             }else{
-                Cookie loginUser = new Cookie("loginUser", user.getUsername() + "@" + user.getPassword());
-                ServletActionContext.getResponse().addCookie(loginUser);
+//                Cookie loginUser = new Cookie("loginUser", user.getUsername() + "@" + user.getPassword());
+                ServletActionContext.getRequest().getSession().setAttribute("loginUser",user);
                 return HOME;
             }
         }else{
             this.addActionError("您的验证码输入有误,请重新输入");
         }
             return LOGIN;
+    }
+
+    /**
+     * 登出模块 由于暂时并没有设计自动登录模块 所以在这里我们并没有把用户信息放入cookie中
+     * 仅仅是放入了session中 用户退出登录的话就将用户session从服务器端清除
+     * @return 返回到登录页面
+     */
+    public String logout(){
+        //移除cookie和session(暂时只有session)
+        ServletActionContext.getRequest().getSession().removeAttribute("loginUser");
+        return LOGIN;
+
     }
 
 }

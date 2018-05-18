@@ -142,7 +142,7 @@
 		$.messager
 		.confirm('系统提示','您确定要退出本次登录吗?',function(isConfirm) {
 			if (isConfirm) {
-				location.href = '${pageContext.request.contextPath }/login.jsp';
+				location.href = '${pageContext.request.contextPath }/userAction_logout.action';
 			}
 		});
 	}
@@ -156,9 +156,10 @@
 	}
 </script>
 </head>
+		 <!--/* */-->
 <body class="easyui-layout">
 	<div data-options="region:'north',border:false"
-		style="height:80px;padding:10px;background:url('./images/header_bg.png') no-repeat right;">
+		style="height:80px;padding:10px;background:url('${pageContext.request.contextPath}/images/header_bg.png') no-repeat right;">
 		<div id="sessionInfoDiv"
 			style="position: absolute;right: 5px;top:10px;">
 			[<strong>超级管理员</strong>]，欢迎你！
@@ -205,7 +206,7 @@
 		</div>
 	</div>
 	<div data-options="region:'south',border:false"
-		style="height:50px;padding:10px;background:url('./images/header_bg.png') no-repeat right;">
+		style="height:50px;padding:10px;background:url('${pageContext.request.contextPath}/images/header_bg.png') no-repeat right;">
 		<table style="width: 100%;">
 			<tbody>
 				<tr>
@@ -214,7 +215,7 @@
 							传智播客 | Powered by <a href="http://www.itcast.cn/">itcast.cn</a>
 						</div>
 					</td>
-					<td style="width: *;" class="co1"><span id="online"
+					<td style="width:50px;" class="co1"><span id="online"
 						style="background: url(${pageContext.request.contextPath }/images/online.png) no-repeat left;padding-left:18px;margin-left:3px;font-size:8pt;color:#005590;">在线人数:1</span>
 					</td>
 				</tr>

@@ -8,6 +8,20 @@
     <!--指定struts的Action对象由spring工厂负责创建-->
     <constant name="struts.objectFactory" value="spring"/>
     <package name="struts" namespace="/" extends="struts-default">
+        <!--配置拦截器-->
+        <interceptors>
+            <interceptor name="bosLoginInterceptor" class="com.afeng.bos.web.interceptor.BosLoginInterceptor">
+                <param name="excludeMethods">login</param>
+            </interceptor>
+            <interceptor-stack name="myStack">
+                <interceptor-ref name="bosLoginInterceptor"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="myStack"/>
+        <global-results>
+            <result name="login">/login.jsp</result>
+        </global-results>
         <!--没写class和method 默认执行ActionContext的execute方法-->
         <action name="page_*_*" >
             <result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
