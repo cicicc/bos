@@ -85,7 +85,34 @@
 		});
 		
 		$("#btnEp").click(function(){
-			alert("修改密码");
+			//在提交页面数据时 首先进行表单校验 如果表单校验通过的话 再进行判断用户输入的两次密码是否相同
+			//相同的话在将数据使用异步的方式发送到服务器端 进行密码修改 修改成功返回1 否则返回false
+            var v = $("#updatePasswordForm").form("validate");
+            // alert(v);
+            if (v) {
+                //表单校验成功进入此页面 进行判断 两次输入框中输入的密码是否相同
+                var newPassword = $("#txtNewPass").val();
+                var rePassword = $("#txtRePass").val();
+                if (newPassword == rePassword) {
+                    // alert(11);
+					//两次输入的密码相同 可以进行下一步的测试 url,[data],[callback],[type]
+                    var url = "${pageContext.request.contextPath}/userAction_modifyPassword.action";
+					$.post(url,{"newPassword":newPassword},function (data) {
+						//首先关闭修改密码的页面
+                        $("#editPwdWindow").window("close");
+                        if (data == 1) {
+                            //密码修改成功
+                            alert("修改成功");
+                        } else {
+                            alert("密码修改出错 请重新尝试");
+                        }
+                    });
+                }else{
+                    $.messager.alert("错误提示", "您输入的两次密码不同,请检查后重新输入", "error");
+                }
+            }else{
+				$.messager.alert("错误提示", "您输入的密码不符合要求 请重新输入", "error");
+            }
 		});
 	});
 
@@ -212,7 +239,7 @@
 				<tr>
 					<td style="width: 300px;">
 						<div style="color: #999; font-size: 8pt;">
-							传智播客 | Powered by <a href="http://www.itcast.cn/">itcast.cn</a>
+							简单应用 | Powered by <a href="http://www.indispensable.cn/">itcast.cn</a>
 						</div>
 					</td>
 					<td style="width:50px;" class="co1"><span id="online"
@@ -230,14 +257,16 @@
         <div class="easyui-layout" fit="true">
             <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
                 <table cellpadding=3>
-                    <tr>
-                        <td>新密码：</td>
-                        <td><input id="txtNewPass" type="Password" class="txt01" /></td>
-                    </tr>
-                    <tr>
-                        <td>确认密码：</td>
-                        <td><input id="txtRePass" type="Password" class="txt01" /></td>
-                    </tr>
+					<form id="updatePasswordForm">
+						<tr>
+							<td>新密码：</td>
+							<td><input id="txtNewPass" data-options="required:true,validType:'length[6,16]'" type="Password" class="txt01 easyui-validatebox" /></td>
+						</tr>
+						<tr>
+							<td>确认密码：</td>
+							<td><input id="txtRePass" data-options="required:true,validType:'length[6,16]'" type="Password" class="txt01 easyui-validatebox" /></td>
+						</tr>
+					</form>
                 </table>
             </div>
             <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">

@@ -12,11 +12,11 @@
     <packaging>jar</packaging>
     <artifactId>bos-domain</artifactId>
     <description>用来存放实体类和映射文件</description>
-<dependencies>
+<!--<dependencies>
     <dependency>
         <groupId>com.afeng</groupId>
         <artifactId>bos-utils</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
-</dependencies>
+</dependencies>-->
 </project>

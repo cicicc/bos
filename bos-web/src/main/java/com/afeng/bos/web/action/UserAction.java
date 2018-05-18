@@ -59,4 +59,13 @@ public class UserAction  extends BaseAction<User>{
 
     }
 
+    /**
+     * 为用户修改密码 并将结果返回到页面
+     * @return 异步提交过来的数据 不需要返回其他页面
+     */
+    public String modifyPassword(){
+
+        return NONE;
+    }
+
 }
