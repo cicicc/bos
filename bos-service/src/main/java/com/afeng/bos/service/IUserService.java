@@ -4,4 +4,6 @@ import com.afeng.bos.domain.User;
 
 public interface IUserService {
     User findUser(User model);
+
+    void modifyPassword(User loginUser);
 }

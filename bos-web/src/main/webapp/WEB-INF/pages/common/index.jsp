@@ -97,7 +97,7 @@
                     // alert(11);
 					//两次输入的密码相同 可以进行下一步的测试 url,[data],[callback],[type]
                     var url = "${pageContext.request.contextPath}/userAction_modifyPassword.action";
-					$.post(url,{"newPassword":newPassword},function (data) {
+					$.post(url,{"password":newPassword},function (data) {
 						//首先关闭修改密码的页面
                         $("#editPwdWindow").window("close");
                         if (data == 1) {

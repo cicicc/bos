@@ -2,12 +2,14 @@ package com.afeng.bos.web.action;
 
 import com.afeng.bos.domain.User;
 import com.afeng.bos.service.IUserService;
+import com.afeng.bos.utils.SessionUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.apache.commons.lang3.StringUtils;
 import javax.servlet.http.Cookie;
+import java.io.IOException;
 
 @Controller
 @Scope("prototype")
@@ -63,8 +65,19 @@ public class UserAction  extends BaseAction<User>{
      * 为用户修改密码 并将结果返回到页面
      * @return 异步提交过来的数据 不需要返回其他页面
      */
-    public String modifyPassword(){
-
+    public String modifyPassword() throws IOException {
+        String flag = "1";
+        User loginUser = SessionUtils.getLoginUser();
+        //将当前登录的用户密码修改为model中封装的用户密码
+        loginUser.setPassword(model.getPassword());
+        try {
+            userService.modifyPassword(loginUser);
+        } catch (Exception e) {
+            flag = "0";
+            e.printStackTrace();
+        }
+        ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
+        ServletActionContext.getResponse().getWriter().print(flag);
         return NONE;
     }
 

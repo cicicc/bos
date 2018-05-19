@@ -27,6 +27,16 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
     }
 
     /**
+     * 对数据库中的此用户进行更新操作 修改密码
+     * @param loginUser 当前的登录用户
+     * 此处的代码可以进行语句的优化 但是暂时没有进行语句的优化
+     */
+    @Override
+    public void modifyPassword(User loginUser) {
+        update(loginUser);
+    }
+
+    /**
      * 单元测试
      * 这个代码根本无法跑起来 会报nullPointerException
      * 很简单的原因 因为在这个过程中 并没有注入userDao 所以hibernateTemplate就是空
