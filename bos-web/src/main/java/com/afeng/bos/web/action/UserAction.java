@@ -34,7 +34,7 @@ public class UserAction  extends BaseAction<User>{
         //获取存放在session域中的key
         String realCheckCode = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
         //首先将页面用户输入的验证码和session域中的验证码进行比较 如果相同的话才进行下一步
-        if (StringUtils.isNotBlank(checkcode)&&realCheckCode.equals(checkcode)) {
+        if (StringUtils.isNotBlank(checkcode)&&checkcode.equals(realCheckCode)) {
             User user = userService.findUser(model);
             if (user == null) {
                 this.addActionError("用户名或者密码错误");
