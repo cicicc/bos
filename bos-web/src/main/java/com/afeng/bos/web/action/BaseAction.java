@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
     protected T model;
     public static final String HOME = "home";
+    public static final String LIST = "list";
 
     @Override
     public T getModel() {

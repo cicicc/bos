@@ -28,11 +28,10 @@
         </action>
 
         <action name="userAction_*" class="com.afeng.bos.web.action.UserAction" method="{1}" >
-            <result name="login">/login.jsp</result>
             <result name="home" >/index.jsp</result>
         </action>
         <action name="staffAction_*" class="com.afeng.bos.web.action.StaffAction" method="{1}" >
-            <result name="login">/login.jsp</result>
+            <result name="list" type="redirectAction">/page_base_staff.action</result>
         </action>
     </package>
 </struts>
