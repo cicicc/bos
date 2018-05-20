@@ -33,5 +33,8 @@
         <action name="staffAction_*" class="com.afeng.bos.web.action.StaffAction" method="{1}" >
             <result name="list" type="redirectAction">/page_base_staff.action</result>
         </action>
+        <action name="regionAction_*" class="com.afeng.bos.web.action.RegionAction" method="{1}" >
+
+        </action>
     </package>
 </struts>
