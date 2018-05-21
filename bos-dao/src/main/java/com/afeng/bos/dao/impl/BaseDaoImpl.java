@@ -64,4 +64,13 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
         String hql = "from " + entityClass.getSimpleName();
         return (List<T>) this.getHibernateTemplate().find(hql);
     }
+
+    /**
+     * 保存或者修改用户传递过来的信息
+     * @param entity 需要操作的数据实体
+     */
+    @Override
+    public void saveOrUpdate(T entity) {
+        this.getHibernateTemplate().saveOrUpdate(entity);
+    }
 }

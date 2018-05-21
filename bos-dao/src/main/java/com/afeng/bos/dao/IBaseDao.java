@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 public interface IBaseDao<T> {
-    public void delete(T entity);
-    public void save(T entity);
-    public void update(T entity);
-    public T findById(Serializable id);
-    public List<T> findAll();
+    void delete(T entity);
+    void save(T entity);
+    void update(T entity);
+    T findById(Serializable id);
+    List<T> findAll();
+    void saveOrUpdate(T entity);
 }
