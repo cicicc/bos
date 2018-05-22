@@ -2,10 +2,15 @@ package com.afeng.bos.web.action;
 
 import com.afeng.bos.domain.Region;
 import com.afeng.bos.service.IRegionService;
+import com.afeng.bos.utils.PinYin4jUtils;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.struts2.ServletActionContext;
+import org.hibernate.criterion.DetachedCriteria;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -25,6 +30,18 @@ public class RegionAction  extends BaseAction<Region>{
     public void setRegionFile(File regionFile) {
         this.regionFile = regionFile;
     }
+    //接收分页参数
+    private int page;
+    private int rows;
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
     //注入service
     @Resource
     private IRegionService regionService;
@@ -51,7 +68,20 @@ public class RegionAction  extends BaseAction<Region>{
                 String  city = row.getCell(2).getStringCellValue();
                 String  district = row.getCell(3).getStringCellValue();
                 String  postcode = row.getCell(4).getStringCellValue();
+                //将数据封装到region对象中
                 Region region = new Region(id, province, city, district, postcode, null, null, null);
+                // 生成数据所对应的分区和短码 此处可以单独提取一个方法出来 放在util类中
+                province = province.substring(0, province.length() - 1);
+                city = city.substring(0, city.length() - 1);
+                district = district.substring(0, district.length() - 1);
+                String info = province + city + district;
+                String[] headByString = PinYin4jUtils.getHeadByString(info);
+                String shortcode = StringUtils.join(headByString);
+                //城市编码---->>shijiazhuang
+                String citycode = PinYin4jUtils.hanziToPinyin(city, "");
+
+                region.setShortcode(shortcode);
+                region.setCitycode(citycode);
                 regions.add(region);
             }
             regionService.saveSubarea(regions);
@@ -63,6 +93,29 @@ public class RegionAction  extends BaseAction<Region>{
         //将flag写入页面 表示读取是否成功
         ServletActionContext.getResponse().setContentType("text/html;charset=UTF-8");
         ServletActionContext.getResponse().getWriter().print(flag);
+
+        return NONE;
+    }
+
+    /**
+     * 分页查询数据
+     * @return  异步进行查询 无需进行相关页面的返回
+     */
+    public String pageQuery() throws IOException {
+        //根据传递过来的参数创建pageBean和离线查询对象
+        DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Region.class);
+        // 设置属性 包括当前页数 每页显示条数 以及离线查询条件
+        pageBean.setCurrentPage(page);
+        pageBean.setPageSize(rows);
+        pageBean.setDetachedCriteria(detachedCriteria);
+        //调用service层进行相关查询
+        regionService.pageQuery(pageBean);
+        //将所得到的数据使用json进行对应的转换
+        String[] excludes = {"currentPage", "pageSize", "detachedCriteria"};
+        String json = switchObjectToJson(excludes);
+        //将数据放入response域中 写回页面
+        ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
+        ServletActionContext.getResponse().getWriter().print(json);
 
         return NONE;
     }
