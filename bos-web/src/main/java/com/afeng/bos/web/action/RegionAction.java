@@ -119,4 +119,15 @@ public class RegionAction  extends BaseAction<Region>{
 
         return NONE;
     }
+
+    /**
+     *
+     * @return
+     */
+    public String listAjax(){
+        
+
+        return NONE;
+    }
+
 }
