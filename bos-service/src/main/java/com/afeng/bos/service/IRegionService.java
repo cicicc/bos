@@ -9,4 +9,8 @@ public interface IRegionService {
     void saveSubarea(List<Region> regions);
 
     void pageQuery(PageBean pageBean);
+
+    List<Region> findByq(String q);
+
+    List<Region> findByq();
 }

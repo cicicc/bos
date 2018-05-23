@@ -42,6 +42,12 @@ public class RegionAction  extends BaseAction<Region>{
         this.rows = rows;
     }
 
+    private String q;
+
+    public void setQ(String q) {
+        this.q = q;
+    }
+
     //注入service
     @Resource
     private IRegionService regionService;
@@ -121,12 +127,20 @@ public class RegionAction  extends BaseAction<Region>{
     }
 
     /**
-     *
-     * @return
+     *  动态加载分区
+     * @return ajax加载数据 所以并没有返回页面
      */
     public String listAjax(){
-        
+        List<Region> regionList = null;
+        if (StringUtils.isNotBlank(q)) {
+            //如果查询条件不为空的话
+            List<Region> list = regionService.findByq(q);
+        }else {
+            //查询所有条件
+            List<Region> list = regionService.findByq();
 
+        }
+        this.switchObjectToJson(new String[]{"subareas"});
         return NONE;
     }
 
