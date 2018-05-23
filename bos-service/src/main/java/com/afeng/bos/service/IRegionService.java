@@ -12,5 +12,6 @@ public interface IRegionService {
 
     List<Region> findByq(String q);
 
-    List<Region> findByq();
+
+    List<Region> findAll();
 }
