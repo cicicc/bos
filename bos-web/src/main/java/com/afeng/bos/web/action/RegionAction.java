@@ -118,7 +118,7 @@ public class RegionAction  extends BaseAction<Region>{
         regionService.pageQuery(pageBean);
         //将所得到的数据使用json进行对应的转换
         String[] excludes = {"currentPage", "pageSize", "detachedCriteria"};
-        String json = switchObjectToJson(excludes);
+        String json = switchObjectToJson(pageBean, excludes);
         //将数据放入response域中 写回页面
         ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
         ServletActionContext.getResponse().getWriter().print(json);
@@ -130,7 +130,7 @@ public class RegionAction  extends BaseAction<Region>{
      *  动态加载分区
      * @return ajax加载数据 所以并没有返回页面
      */
-    public String listAjax(){
+    public String listAjax() throws IOException {
         List<Region> regionList = null;
         if (StringUtils.isNotBlank(q)) {
             //如果查询条件不为空的话
@@ -140,7 +140,9 @@ public class RegionAction  extends BaseAction<Region>{
             regionList = regionService.findAll();
 
         }
-        this.switchObjectToJson(new String[]{"subareas"});
+        String json = this.switchObjectToJson(new String[]{"subareas"}, regionList);
+        ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
+        ServletActionContext.getResponse().getWriter().print(json);
         return NONE;
     }
 

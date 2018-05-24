@@ -223,8 +223,9 @@
 					<tr>
 						<td>选择区域</td>
 						<td>
-							<input class="easyui-combobox" name="region.id"  
-    							data-options="valueField:'id',textField:'name',url:'${pageContext.request.contextPath}/regionAction_listAjax.action'" />
+						<input class="easyui-combobox" name="region.id"
+							   data-options="valueField:'id',textField:'name',mode:'remote',
+                                                        url:'regionAction_listAjax.action'" />
 						</td>
 					</tr>
 					<tr>

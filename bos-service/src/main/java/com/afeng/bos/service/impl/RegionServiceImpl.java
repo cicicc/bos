@@ -40,12 +40,14 @@ public class RegionServiceImpl  implements IRegionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Region> findByq(String q) {
 
         return regionDao.findByQ(q);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Region> findAll() {
         return regionDao.findAll();
     }

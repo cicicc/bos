@@ -1,6 +1,7 @@
 package com.afeng.bos.web.action;
 
 import com.afeng.bos.domain.PageBean;
+import com.afeng.bos.domain.Region;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import net.sf.json.JSONObject;
@@ -9,6 +10,7 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
     protected T model;
@@ -44,12 +46,22 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T> {
     /**
      * baseAction类抽取子类的代码
      */
-    protected String switchObjectToJson(String[] excludes){
+    protected String switchObjectToJson(Object object, String[] excludes){
         //将所得到的数据使用json进行对应的转换
         JsonConfig jsonConfig = new JsonConfig();
         jsonConfig.setExcludes(excludes);
         //将pageBean对象中的数据转换为json对象 并返回给调用者
-        return  JSONObject.fromObject(pageBean, jsonConfig).toString();
+        return JSONObject.fromObject(object, jsonConfig).toString();
+    }
+    /**
+     * baseAction类抽取子类的代码
+     */
+    protected String switchObjectToJson( String[] excludes, List list){
+        //将所得到的数据使用json进行对应的转换
+        JsonConfig jsonConfig = new JsonConfig();
+        jsonConfig.setExcludes(excludes);
+        //将pageBean对象中的数据转换为json对象 并返回给调用者
+        return JSONObject.fromObject(list, jsonConfig).toString();
     }
 
 }
