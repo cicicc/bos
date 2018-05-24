@@ -134,10 +134,10 @@ public class RegionAction  extends BaseAction<Region>{
         List<Region> regionList = null;
         if (StringUtils.isNotBlank(q)) {
             //如果查询条件不为空的话
-            List<Region> list = regionService.findByq(q);
+            regionList = regionService.findByq(q);
         }else {
             //查询所有条件
-            List<Region> list = regionService.findAll();
+            regionList = regionService.findAll();
 
         }
         this.switchObjectToJson(new String[]{"subareas"});
