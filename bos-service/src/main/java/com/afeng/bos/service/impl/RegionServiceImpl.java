@@ -4,13 +4,13 @@ import com.afeng.bos.dao.IRegionDao;
 import com.afeng.bos.domain.PageBean;
 import com.afeng.bos.domain.Region;
 import com.afeng.bos.service.IRegionService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
 @Transactional
-@Component
+@Service
 public class RegionServiceImpl  implements IRegionService {
 
     //注入regionService

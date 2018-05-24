@@ -26,15 +26,20 @@
         <action name="page_*_*" >
             <result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
         </action>
-
+        <!--配置UserAction-->
         <action name="userAction_*" class="com.afeng.bos.web.action.UserAction" method="{1}" >
             <result name="home" >/index.jsp</result>
         </action>
+        <!--配置配送员的action-->
         <action name="staffAction_*" class="com.afeng.bos.web.action.StaffAction" method="{1}" >
             <result name="list" type="redirectAction">/page_base_staff.action</result>
         </action>
+        <!--配置区域action-->
         <action name="regionAction_*" class="com.afeng.bos.web.action.RegionAction" method="{1}" >
-
+        </action>
+        <!--配置分区action-->
+        <action name="subareaAction_*" class="com.afeng.bos.web.action.SubareaAction" method="{1}" >
+            <result name="list" type="redirectAction">/page_base_subarea.action</result>
         </action>
     </package>
 </struts>

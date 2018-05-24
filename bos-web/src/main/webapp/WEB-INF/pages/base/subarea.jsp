@@ -196,7 +196,19 @@
 	function doDblClickRow(){
 		alert("双击表格数据...");
 	}
-</script>	
+
+</script>
+	<script type="text/javascript">
+		$(function () {
+            $("#save").click(function () {
+                // alert(1);
+                var  res = $("#addSubareaForm").form("validate");
+                if (res) {
+                    $("#addSubareaForm").submit();
+                }
+            });
+        })
+	</script>
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
 	<div region="center" border="false">
@@ -211,7 +223,7 @@
 		</div>
 		
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form>
+			<form action="${pageContext.request.contextPath}/subareaAction_add.action" id="addSubareaForm">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">分区信息</td>
@@ -225,12 +237,12 @@
 						<td>
 						<input class="easyui-combobox" name="region.id"
 							   data-options="valueField:'id',textField:'name',mode:'remote',
-                                                        url:'regionAction_listAjax.action'" />
+                                                        url:'regionAction_listAjax.action'" required="true"/>
 						</td>
 					</tr>
 					<tr>
 						<td>关键字</td>
-						<td><input type="text" name="addresskey" class="easyui-validatebox" required="true"/></td>
+						<td><input type="text" name="addresskey" class="easyui-validatebox" required="true" /></td>
 					</tr>
 					<tr>
 						<td>起始号</td>
@@ -238,7 +250,7 @@
 					</tr>
 					<tr>
 						<td>终止号</td>
-						<td><input type="text" name="endnum" class="easyui-validatebox" required="true"/></td>
+						<td><input type="text" name="endnum" class="easyui-validatebox" required="true" /></td>
 					</tr>
 					<tr>
 						<td>单双号</td>

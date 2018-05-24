@@ -3,8 +3,6 @@ package com.afeng.bos.web.action;
 import com.afeng.bos.domain.Region;
 import com.afeng.bos.service.IRegionService;
 import com.afeng.bos.utils.PinYin4jUtils;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -118,11 +116,7 @@ public class RegionAction  extends BaseAction<Region>{
         regionService.pageQuery(pageBean);
         //将所得到的数据使用json进行对应的转换
         String[] excludes = {"currentPage", "pageSize", "detachedCriteria"};
-        String json = switchObjectToJson(pageBean, excludes);
-        //将数据放入response域中 写回页面
-        ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
-        ServletActionContext.getResponse().getWriter().print(json);
-
+        switchObjectToJson(pageBean, excludes);
         return NONE;
     }
 
@@ -140,9 +134,7 @@ public class RegionAction  extends BaseAction<Region>{
             regionList = regionService.findAll();
 
         }
-        String json = this.switchObjectToJson(new String[]{"subareas"}, regionList);
-        ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
-        ServletActionContext.getResponse().getWriter().print(json);
+        this.switchObjectToJson(regionList, new String[]{"subareas"});
         return NONE;
     }
 
