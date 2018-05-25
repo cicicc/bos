@@ -7,4 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class SubareaDaoImpl extends BaseDaoImpl<Subarea> implements ISubareaDao {
 
+    @Override
+    public int getCount() {
+        return 0;
+    }
 }

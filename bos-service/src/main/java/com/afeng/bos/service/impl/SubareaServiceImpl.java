@@ -1,12 +1,14 @@
 package com.afeng.bos.service.impl;
 
 import com.afeng.bos.dao.ISubareaDao;
+import com.afeng.bos.domain.PageBean;
 import com.afeng.bos.domain.Subarea;
 import com.afeng.bos.service.ISubareaService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 @Transactional
@@ -23,5 +25,32 @@ public class SubareaServiceImpl implements ISubareaService {
     @Override
     public void add(Subarea subarea) {
         subareaDao.save(subarea);
+    }
+
+    /**
+     * 查询所有的分区信息 并返回list集合
+     * @return 返回分区的list集合
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<Subarea> findAll() {
+
+        return null;
+    }
+
+    /**
+     * 查询数据库中所有的数据数目
+     * @return 查询到的subarea数目
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public int gedCount() {
+
+        return subareaDao.getCount();
+    }
+
+    @Override
+    public List<Subarea> pageQuery(PageBean pageBean) {
+        return null;
     }
 }
