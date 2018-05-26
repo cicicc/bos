@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.io.IOException;
 
 @Controller
 @Scope("prototype")
@@ -42,12 +42,13 @@ public class SubareaAction  extends BaseAction<Subarea>{
      * 查询数据库中所有的区域
      * @return 异步查询所有 所以无需返回到其他页面
      */
-    public String findAll() {
+    public String findAll() throws IOException {
         pageBean.setTotal(subareaService.gedCount());
         pageBean.setDetachedCriteria(DetachedCriteria.forClass(Subarea.class));
         pageBean.setCurrentPage(Integer.valueOf(page));
         pageBean.setPageSize(Integer.valueOf(rows));
-        List<Subarea> subareaList = subareaService.pageQuery(pageBean);
+        subareaService.pageQuery(pageBean);
+        this.switchObjectToJson(pageBean, new String[]{"decidedzone", "subareas"});
         return NONE;
     }
 }

@@ -49,8 +49,15 @@ public class SubareaServiceImpl implements ISubareaService {
         return subareaDao.getCount();
     }
 
+    /**
+     * 根据pageBean1中的参数进行相对应的查询 并把数据封装到pageBean中去
+      * @param pageBean 封装参数的pageBean对象
+     */
     @Override
-    public List<Subarea> pageQuery(PageBean pageBean) {
-        return null;
+    @Transactional(readOnly = true)
+    public void pageQuery(PageBean pageBean) {
+
     }
+
+
 }

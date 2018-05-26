@@ -12,5 +12,5 @@ public interface ISubareaService {
 
     int gedCount();
 
-    List<Subarea> pageQuery(PageBean pageBean);
+    void pageQuery(PageBean pageBean);
 }
