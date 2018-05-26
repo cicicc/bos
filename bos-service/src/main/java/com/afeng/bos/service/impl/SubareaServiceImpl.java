@@ -41,12 +41,13 @@ public class SubareaServiceImpl implements ISubareaService {
     /**
      * 查询数据库中所有的数据数目
      * @return 查询到的subarea数目
+     * @param pageBean
      */
     @Override
     @Transactional(readOnly = true)
-    public int gedCount() {
+    public int gedCount(PageBean pageBean) {
 
-        return subareaDao.getCount();
+        return subareaDao.getCount(pageBean);
     }
 
     /**

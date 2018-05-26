@@ -10,7 +10,7 @@ public interface ISubareaService {
 
     List<Subarea> findAll();
 
-    int gedCount();
+    int gedCount(PageBean pageBean);
 
     void pageQuery(PageBean pageBean);
 }

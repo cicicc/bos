@@ -43,7 +43,7 @@ public class SubareaAction  extends BaseAction<Subarea>{
      * @return 异步查询所有 所以无需返回到其他页面
      */
     public String findAll() throws IOException {
-        pageBean.setTotal(subareaService.gedCount());
+        pageBean.setTotal(subareaService.gedCount(pageBean));
         pageBean.setDetachedCriteria(DetachedCriteria.forClass(Subarea.class));
         pageBean.setCurrentPage(Integer.valueOf(page));
         pageBean.setPageSize(Integer.valueOf(rows));
